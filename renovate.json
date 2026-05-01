@@ -1,0 +1,50 @@
+{
+  "extends": ["config:base"],
+  "reviewers": ["team:devops"],
+  "reviewersSampleSize": 2,
+  "dependencyDashboard": true,
+  "labels": ["dependencies"],
+  "schedule": ["before 8am"],
+  "hostRules": [
+    {
+      "matchHost": "https://npm.pkg.github.com/",
+      "hostType": "npm",
+      "encrypted": {
+        "token": "wcFMA/xDdHCJBTolAQ/+LH8hJMEpr+vvN5Ah6dg7a8rrxCzPR9NFQ/UFTNndYtZRzIBTbUvk5WKSSNahb1aBxu7cueNOCQjUarSbCgmZGgdwk8spY+mVXeapp9brJFJTZ/rKDplNQDCo57LSXaRg0yzGWxmD7HyomC9JzD9lGh3BIzFaMFwQ6JwT5lgCcZTmxP4UrHSXFG7uacRZ0eYHAzu3U5qElPxPWBi9VDfnh6sbFvxcgQvOcfc3wxI0CXCwx0F+7MUQJF0pw92pjY5NU3tmS17E4jMOAGP6b+7tWAbIMa4JeACN73astubvUFAn6VBqqGrHrkp6zyexKukGIOXFkkwYJ5dHuKJEaJGfGe/Y2jigDBYp+PZqyB1CeZsVgJ8axFw8SECNkGAzAh+jWCPJjNfbaIsIfugaeNaZRzdnwrFe6wsoq/Pfv2stvFydc7Pk8X+SMAlXYKwMWJ4qTSpcFURR+IV9awC+1Wj3aaQ40B5Fui78dU0zSo6CcM9Hu5JCb/N4vyKYix1OGHaioj8TOConjUai1mgPWTjg1pWi/zHgnRLdD6XGg8z4hLTfZvt3tyaGO5B+FQ0DkxnKb8JkF3rlT0q3vOOQgh/8hokBeyS51pQyfBIG2pmpthfJvx18n6p5OfpBQOYEf66dbcpJnH430RDAqSWh9B16PflpxxxYAsnzCHVlEGOk1C7SegHD0IY0TolTgpIqmezJFgzCrI0cajIqUByGh8WyR+Rfxn/KkIRHWqrXoKjEtu3vVYPTlMv/N7PQ8h1ysMw8RLU2e6uQr9YNhWDeKVR6egAnZI8dOrrSwwTUX8gZjzXSffy8dgRA1vW/kzfhHoV1VQSjZ9qHJLQjHYc5"
+      }
+    }
+  ],
+  "npmrc": "@gastromatic:registry=https://npm.pkg.github.com/",
+  "packageRules": [
+    {
+      "groupName": "dependencies (non-major)",
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true,
+      "schedule": ["before 8am on Monday"]
+    },
+    {
+      "groupName": "devDependencies",
+      "addLabels": ["devDependencies"],
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true,
+      "schedule": ["before 8am on Monday"]
+    },
+    {
+      "groupName": "devDependencies (cd-workflow)",
+      "addLabels": ["devDependencies"],
+      "matchFiles": ["cd.yml"],
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "schedule": ["before 8am on Monday"]
+    },
+    {
+      "groupName": "semantic-release",
+      "addLabels": ["devDependencies", "semantic-release"],
+      "matchPackagePatterns": "semantic-release",
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "schedule": ["before 8am on Monday"]
+    }
+  ]
+}

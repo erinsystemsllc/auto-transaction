@@ -1,0 +1,5 @@
+'(src|bin|test)/**/*.{ts,json}':
+  - prettier --write
+  - eslint
+'Dockerfile':
+  - npm run lint:dockerfile

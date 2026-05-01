@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+
+  node:
+    build:
+      context: .
+      target: development
+    image: express-api:development
+    environment:
+      - DEBUG=express-api:*
+      - TERMINATION_GRACE_PERIOD=0
+    ports:
+      - "4000:4000"
+      - "9229:9229"
+    volumes:
+      - ./bin/:/home/node/app/bin/
+      - ./src:/home/node/app/src
